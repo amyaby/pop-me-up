@@ -30,7 +30,6 @@
 7. [How To Use](#7-how-to-use)
 8. [Where Is Data Stored](#8-where-is-data-stored)
 9. [Troubleshooting](#9-troubleshooting)
-10. [Recent Changes](#10-recent-changes)
 
 ---
 
@@ -38,7 +37,7 @@
 
 **Reminder Bubble** is a small always-on-top widget for Windows. A glowing purple circle
 stays at the bottom-right of your screen. Click it to open a reminder panel, type what you
-need to remember, pick a day and a time — and when the time arrives, it plays a soft chime
+need to remember, pick a day and a time — and when the time arrives, it rings the alarm
 and pops a toast on screen.
 
 It is built with **Electron**: the interface is plain HTML/CSS/JS (rendered by Chromium)
@@ -63,11 +62,11 @@ A small habit that can pop your focus and productivity up.
 - 🟣 **Floating glowing bubble** — always on top, transparent, draggable anywhere.
 - ⚡ **Click-through** — the invisible window never blocks pages or apps under it.
 - ⏰ **Timed reminders** — fires at `HH:MM`, optionally only on a chosen weekday.
-- 🎵 **Synthesized sound** — a soft chime at reminder time, a tiny tick on button clicks
+- 🎵 **Synthesized sound** — a ringing bell alarm at reminder time, a tiny tick on button clicks
   (no audio files — tones are generated live).
 - ✅ **To-do items** — reminders without a time act as plain checkable notes.
 - 🔢 **Priority & numbering** — Low/Med/High badges + automatic `#1, #2, …` labels.
-- ⬆️⬇️ **Reorder** — move reminders up/down with ▲ / ▼.
+- ⬆️⬇️ **Reorder** — move reminders up/down with ▲ / ▼, **or drag & drop** any reminder to move it anywhere in the list.
 - ✏️ **Click-to-edit** — click any reminder's text to change it inline.
 - 💾 **Persistent storage** — reminders survive restarts, shutdowns, and laptop closing.
 - 🔁 **Auto-start at login** — appears by itself when you turn on the PC.
@@ -83,7 +82,7 @@ A small habit that can pop your focus and productivity up.
 | **Node.js** (bundled with Electron) | Gives the "backend" access to the OS (window, files, process) |
 | **Vanilla JavaScript** | All the app logic (no frameworks, no build step) |
 | **HTML + CSS** | The bubble UI, gradients, glow, animations, frosted panel |
-| **Web Audio API** | Synthesizes chimes and clicks (oscillators + gain envelopes) |
+| **Web Audio API** | Synthesizes the ringing alarm and click sounds (oscillators + gain envelopes) |
 | **localStorage** | Saves reminders on disk |
 | **IPC + contextBridge** | The secure communication channel renderer ⇄ main |
 | **Windows Script Host (.vbs)** | Hidden launcher that starts the app at login |
@@ -298,7 +297,8 @@ internet or additional setup needed.
 - **Edit** — click the reminder's *text*: an inline form opens (text, day, time, Save / Cancel).
   `Enter` = save, `Esc` = cancel.
 - **Priority** — click the Low/Med/High badge to cycle it (gray / yellow / red).
-- **Reorder** — press ▲ / ▼ on an item. The `#1, #2…` numbers update automatically.
+- **Reorder (▲ / ▼)** — press ▲ / ▼ on an item. The `#1, #2…` numbers update automatically.
+- **Reorder (drag & drop)** — grab any reminder row and drag it; a violet line shows where it will land (top or bottom half of a row), release to drop.
 - **Delete** — press ✕.
 
 ---
@@ -319,7 +319,7 @@ Closing the laptop, restarting Windows, or quitting the app **does not erase** y
 - **Bubble doesn't appear** → from the `app` folder run `npm start`; then check
   `%APPDATA%\popup-reminder\error.log` for errors.
 - **Reminders lost** → confirm the storage folder still exists (see section 8).
-- **No sound** → check volume; the chime is intentionally soft.
+- **No sound** → check volume; the alarm is a short bell ring, clicks are intentionally soft.
 - **Two bubbles** → impossible by design (single-instance lock). If one seems stuck,
   run `taskkill /IM electron.exe /F`, then relaunch.
 
