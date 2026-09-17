@@ -173,6 +173,9 @@
     color: var(--text);
     animation: itemIn .25s ease;
   }
+  #list li.dragging-source { opacity: 0.35; }
+  #list li.drop-target-before { border-top: 3px solid var(--violet); }
+  #list li.drop-target-after  { border-bottom: 3px solid var(--violet); }
   @keyframes itemIn {
     from { opacity: 0; transform: translateY(6px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -511,6 +514,32 @@
 
     main.onclick = () => editItem(i, li);
 
+    li.draggable = true;
+    li.addEventListener('dragstart', (e) => {
+      if (li.querySelector('.edit-form')) { e.preventDefault(); return; }
+      dragIndex = i;
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', String(i));
+      li.classList.add('dragging-source');
+    });
+    li.addEventListener('dragover', (e) => {
+      if (dragIndex === -1) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      const rect = li.getBoundingClientRect();
+      const after = (e.clientY - rect.top) > rect.height / 2;
+      clearDragMarkers();
+      li.classList.add(after ? 'drop-target-after' : 'drop-target-before');
+    });
+    li.addEventListener('drop', (e) => {
+      e.preventDefault();
+      if (dragIndex === -1) return;
+      const rect = li.getBoundingClientRect();
+      const after = (e.clientY - rect.top) > rect.height / 2;
+      reorder(dragIndex, i, after);
+    });
+    li.addEventListener('dragend', clearDragMarkers);
+
     const tm = document.createElement('div');
     tm.className = 'time' + (timeLabel(r) ? '' : ' no-alarm');
     const dot = document.createElement('span'); dot.className = 'dot';
@@ -547,6 +576,23 @@
     reminders[j] = tmp;
     save(); render();
     playClick();
+  }
+
+  // ---------- drag & drop reorder ----------
+  let dragIndex = -1;
+  function reorder(from, to, after) {
+    dragIndex = -1;
+    if (from === to && !after) return;
+    let pos = after ? to + 1 : to;
+    const [it] = reminders.splice(from, 1);
+    if (from < pos) pos--;
+    reminders.splice(pos, 0, it);
+    save(); render();
+    playClick();
+  }
+  function clearDragMarkers() {
+    document.querySelectorAll('#list li.drop-target-before, #list li.drop-target-after, #list li.dragging-source')
+      .forEach((n) => n.classList.remove('drop-target-before', 'drop-target-after', 'dragging-source'));
   }
 
   // ---------- edit item (click on the text) ----------
