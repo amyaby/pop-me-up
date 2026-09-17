@@ -226,7 +226,7 @@ taskkill /IM electron.exe /F
 Simply run `npm start` again from the `app` folder. You never need to re-clone or
 reinstall — the app stays installed on your machine.
 
-### Step 6 — (Optional) Make it start automatically at login
+### Step 6 — Make it start automatically at login
 If you want the bubble to appear by itself every time you log into Windows, run once:
 ```
 install-autostart.bat
