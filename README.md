@@ -323,17 +323,3 @@ Closing the laptop, restarting Windows, or quitting the app **does not erase** y
 - **Two bubbles** → impossible by design (single-instance lock). If one seems stuck,
   run `taskkill /IM electron.exe /F`, then relaunch.
 
----
-
-## 10. Recent Changes
-
-- Added **screenshots** to the README and a **beginner-friendly install guide** with generic
-  paths (no personal/wall-of-text assumptions) — any Windows user can now install it.
-- Launchers rewritten to work on **any** machine: local clones run straight from the repo;
-  remote (WSL/UNC) sources still sync first. Auto-start only ever adds one file to Startup.
-- Drag switched from `pointer` events to `mouse` events — now works reliably in a
-  click-through transparent window.
-- Buttons play a soft **tick**; the chime plays **only when a reminder fires**.
-- The clock icon inside time fields and in the toast is now a **white/lavender SVG clock**
-  (the old black emoji was invisible).
-- Optional **day**, **priority**, **numbering**, **reorder**, and **click-to-edit**.
