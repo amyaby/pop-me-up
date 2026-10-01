@@ -327,3 +327,5 @@ Closing the laptop, restarting Windows, or quitting the app **does not erase** y
 Found a bug or want to request a feature? Open an issue — it helps a lot!
 
 [![Report bugs / Request features](https://img.shields.io/badge/Report%20bugs%20%2F%20Request%20features-Click%20here-blue)](https://github.com/amyaby/pop-me-up/issues/new)
+
+[![Issues](https://img.shields.io/github/issues/amyaby/pop-me-up)](https://github.com/amyaby/pop-me-up/issues)
