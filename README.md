@@ -322,4 +322,8 @@ Closing the laptop, restarting Windows, or quitting the app **does not erase** y
 - **No sound** → check volume; the alarm is a short bell ring, clicks are intentionally soft.
 - **Two bubbles** → impossible by design (single-instance lock). If one seems stuck,
   run `taskkill /IM electron.exe /F`, then relaunch.
+## Feedback
 
+Found a bug or want to request a feature? Open an issue — it helps a lot!
+
+[![Report bugs / Request features](https://img.shields.io/badge/Report%20bugs%20%2F%20Request%20features-Click%20here-blue)](https://github.com/amyaby/pop-me-up/issues/new)
